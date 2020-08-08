@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="icons/moon.svg">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.0/css/bulma.css">
+    <title>Customer</title>
+</head>
+
+<body>
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand" >
+            <a class="navbar-item is-size-5 has-text-weight-bold" href="/">
+                <img src="icons/moon.svg" width="20" height="20" style="margin-right: 0.3rem;"><span>Orders</span>
+            </a>
+        </div>
+        <div id="navbarBasicExample" class="navbar-menu">
+            <div class="navbar-start">
+                <a href="/customer" class="navbar-item">
+                    Customer
+                </a>
+                <a href="/seller" class="navbar-item">
+                    Seller
+                </a>
+            </div>
+        </div>
+    </nav>
+    <section class="section">
+        <div class="container">
+            <div class="title is-4 has-text-centered">
+                Orders - Customer
+            </div>
+            <div class="columns is-centered">
+                <div class="column is-half">
+                    <div class="card">
+                        <div class="card-content">
+                            <form action="/sendOrder" method="POST">
+                                <div class="field">
+                                    <label class="label">Customer name</label>
+                                    <div class="control">
+                                        <input name="customerName" class="input" type="text"
+                                            placeholder="Type customer's name">
+                                    </div>
+                                </div>
+                                <div class="field">
+                                    <label class="label">Order's price</label>
+                                    <div class="control">
+                                        <input name="price" class="input" type="text" placeholder="Type order's price">
+                                    </div>
+                                </div>
+                                <div class="control has-text-centered">
+                                    <button type="submit" class="button is-primary is-outlined">Send order</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>

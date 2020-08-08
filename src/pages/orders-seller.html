@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="icons/moon.svg">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.0/css/bulma.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"
+        integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <title>Seller</title>
+</head>
+
+<body>
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand" >
+            <a class="navbar-item is-size-5 has-text-weight-bold" href="/">
+                <img src="icons/moon.svg" width="20" height="20" style="margin-right: 0.3rem;"><span>Orders</span>
+            </a>
+        </div>
+        <div class="navbar-menu">
+            <div class="navbar-start">
+                <a href="/customer" class="navbar-item">
+                    Customer
+                </a>
+                <a href="/seller" class="navbar-item">
+                    Seller
+                </a>
+            </div>
+        </div>
+    </nav>
+    <section class="section">
+        <div class="container">
+            <div class="title is-4 has-text-centered">
+                Orders - Seller
+            </div>
+            <div class="columns is-centered">
+                <div class="column is-one-third">
+                    <div class="card">
+                        <div class="card-content">
+                            <table class="table is-fullwidth">
+                                <thead>
+                                    <tr>
+                                        <th class="is-size-6">Customer name</th>
+                                        <th class="is-size-6">Price</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script>
+        $.getJSON("/orders", orders => {
+            for (order of orders) {
+                var markup = "<tr><td>" + order.customerName + "</td><td>" + order.price + "</td></tr>";
+                $("table tbody").append(markup);
+            }
+        });
+        var eventSource = new EventSource("/sse");
+        eventSource.addEventListener("message", event => {
+            try {
+                if (event.data) {
+                    const order = JSON.parse(event.data);
+                    var markup = "<tr><td>" + order.customerName + "</td><td>" + order.price + "</td></tr>";
+                    $("table tbody").append(markup);
+                }
+            } catch (err) {
+                alert("Error")
+            }
+        }, false)
+    </script>
+</body>
+
+</html>
